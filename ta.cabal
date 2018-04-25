@@ -15,10 +15,34 @@ build-type:          Simple
 extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
-executable ta
-  main-is:             Main.hs
-  -- other-modules:
-  -- other-extensions:
-  build-depends:       base >=4.10 && <4.11
+library
   hs-source-dirs:      src
+  exposed-modules:     Ta
+  build-depends:       base
+                     , thyme == 0.3.5.5
   default-language:    Haskell2010
+  ghc-options:         -Wall -fwarn-tabs
+
+executable ta
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         -Wall -fwarn-tabs
+  build-depends:       base
+                     , ta
+  default-language:    Haskell2010
+
+test-suite test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , hedgehog == 0.5.3
+                     , ta
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         -Wall -fwarn-tabs
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/justanotherdot/ta.git
