@@ -1,3 +1,8 @@
+mod job;
+
+use self::job::Job;
+
 fn main() {
-    println!("Hello, world!");
+    let j = Job::new();
+    println!("{:?}", j);
 }
